@@ -3,10 +3,10 @@ import MessageBubble from "./MessageBubble";
 
 export default function MessageList({ messages }) {
   return (
-    <div className="message-list">
-      {messages.map((msg, idx) => (
-        <MessageBubble key={idx} role={msg.role} content={msg.content} />
-      ))}
-    </div>
+      <div className="flex flex-col space-y-4">
+        {messages.map((m, i) => (
+            <MessageBubble key={i} role={m.role} content={m.content} />
+        ))}
+      </div>
   );
 }
