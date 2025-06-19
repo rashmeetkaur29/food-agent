@@ -1,25 +1,48 @@
-const fs = require('fs');
-const path = require('path');
+// backend/utils/userStore.js
+const fs   = require("fs");
+const path = require("path");
 
-const FILE_PATH = path.join(__dirname, '../data/userData.json');
+// Resolve the path to backend/data/userData.json
+const FILE_PATH = path.resolve(__dirname, "../data/userData.json");
 
-// Ensure file exists
-if (!fs.existsSync(FILE_PATH)) {
-  fs.mkdirSync(path.dirname(FILE_PATH), { recursive: true });
-  fs.writeFileSync(FILE_PATH, '{}');
+// Bootstrap: create data folder + file if missing
+try {
+  const dir = path.dirname(FILE_PATH);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(FILE_PATH)) fs.writeFileSync(FILE_PATH, "{}", "utf-8");
+} catch (err) {
+  console.error("❌ Could not bootstrap userData.json:", err);
 }
 
-// Save user preferences
-function saveUserData(userId, data) {
-  let store = JSON.parse(fs.readFileSync(FILE_PATH));
-  store[userId] = { ...(store[userId] || {}), ...data };
-  fs.writeFileSync(FILE_PATH, JSON.stringify(store, null, 2));
+function readStore() {
+  try {
+    const raw = fs.readFileSync(FILE_PATH, "utf-8");
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error("❌ Error reading userData.json:", err);
+    return {};
+  }
 }
 
-// Get user preferences
+function writeStore(store) {
+  try {
+    fs.writeFileSync(FILE_PATH, JSON.stringify(store, null, 2), "utf-8");
+    console.log("✅ userData.json updated");
+  } catch (err) {
+    console.error("❌ Error writing userData.json:", err);
+  }
+}
+
+function saveUserData(userId, newData) {
+  console.log(`💾 Saving data for ${userId}:`, newData);
+  const store = readStore();
+  store[userId] = { ...(store[userId] || {}), ...newData };
+  writeStore(store);
+}
+
 function getUserData(userId) {
-  let store = JSON.parse(fs.readFileSync(FILE_PATH));
-  return store[userId] || null;
+  const store = readStore();
+  return store[userId] || {};
 }
 
 module.exports = { saveUserData, getUserData };

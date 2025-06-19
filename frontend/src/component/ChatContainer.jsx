@@ -7,22 +7,13 @@ export default function ChatContainer() {
     const { messages, sendMessage, loading } = useChat();
 
     return (
-        <div className="chat-container">
-            {/* Header */}
-            <div className="header">
-                <div className="logo-title">
-                    <span className="emoji-logo">🍱</span>
-                    <h1 className="title">Food Assistant</h1>
-                </div>
-                <span className="powered-by">powered by AI</span>
-            </div>
-
-            {/* Messages */}
-            <div className="message-list">
+        <div className="flex flex-col h-screen w-screen bg-gray-50">
+            {/* Chat messages */}
+            <div className="flex-1 overflow-auto bg-white sm:p-6 p-4">
                 <MessageList messages={messages} />
             </div>
 
-            {/* Input */}
+            {/* Input bar */}
             <ChatInput onSend={sendMessage} disabled={loading} />
         </div>
     );
