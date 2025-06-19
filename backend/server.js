@@ -1,6 +1,5 @@
 // backend/server.js
 
-// 1) Load environment variables (must have GOOGLE_PLACES_API_KEY in backend/.env)
 require("dotenv").config();
 console.log("🔑 GOOGLE_PLACES_API_KEY =", process.env.GOOGLE_PLACES_API_KEY);
 

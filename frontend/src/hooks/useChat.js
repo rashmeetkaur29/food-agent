@@ -8,8 +8,10 @@ import { chatWithAgent } from "../api/openai.js";
 // your backend base URL
 const API_BASE = "http://localhost:3001/api";
 
+
 // classification client (for cuisine/mood)
 const classifierClient = new OpenAI({
+
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
 });
