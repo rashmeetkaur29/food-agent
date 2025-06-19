@@ -2,7 +2,6 @@ import React from "react";
 import { useChat } from "../hooks/useChat";
 import MessageList from "./MessageList";
 import ChatInput from "./ChatInput";
-import "../App.css";
 
 export default function ChatContainer() {
     const { messages, sendMessage, loading } = useChat();
