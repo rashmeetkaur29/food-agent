@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+body {
+  background-color: pink !important;
+}
+
+
 /* General app styles */
 body {
   margin: 0;
