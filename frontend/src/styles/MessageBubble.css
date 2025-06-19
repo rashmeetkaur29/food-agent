@@ -1,0 +1,27 @@
+.message-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  position: relative;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* AI message bubble */
+.message-bubble.ai {
+  background-color: #f1f0f0;
+  color: #333;
+  border-top-left-radius: 0;
+  align-self: flex-start;
+}
+
+/* User message bubble */
+.message-bubble.user {
+  background-color: #6f42c1;
+  color: white;
+  border-top-right-radius: 0;
+  align-self: flex-end;
+}
